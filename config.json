@@ -1,0 +1,6 @@
+{
+  "clientId": "1327997441596850219",
+  "discordConnectRetryMS": 30000,
+  "VLCConnectRetryMS": 30000,
+  "presenceUpdateIntervalMS": 5000
+}

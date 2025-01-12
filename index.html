@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>vlc rpc</title>
+    <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css" />
+    <style>
+      .container {
+        margin-top: 30px;
+      }
+      .metadata {
+        margin-top: 20px;
+      }
+      .input-field label.active {
+        transform: translateY(-14px) scale(0.8);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h4>Fill in your details</h4>
+
+      <div class="row">
+        <form class="col s12" id="connection-form">
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="ip" type="text" value="localhost" />
+              <label for="ip" class="active">IP Address</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="port" type="number" value="8080" />
+              <label for="port" class="active">Port</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="username" type="text" />
+              <label for="username" class="active">Username (optional)</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="password" type="password" />
+              <label for="password" class="active">Password</label>
+            </div>
+          </div>
+          <button type="button" class="btn waves-effect waves-light" id="connect-button">Save</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
+    <script type="module" src="/src/renderer.ts"></script>
+  </body>
+</html>
