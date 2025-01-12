@@ -1,7 +1,7 @@
 {
   "name": "vlc-rpc",
   "productName": "vlc-rpc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Discord rich presence for VLC Media Player",
   "main": ".vite/build/main.js",
   "scripts": {

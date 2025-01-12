@@ -212,13 +212,24 @@ const startPresenceUpdater = async () => {
 
 const setPresence = async () => {
   if (!enabled) return await rpc.user?.clearActivity();
-  if (!vlc || !rpc) return console.log('VLC or RPC not connected');
+  if (!vlc) {
+    console.log('VLC not connected');
+    await rpc.user?.clearActivity();
+    return;
+  }
+  if (!rpc) return console.log('RPC not connected');
 
-  const status = await vlc.status();
-  const meta = await vlc.meta();
+  let status;
+  let meta;
 
-  console.log(status);
-  console.log(meta);
+  try {
+    status = await vlc.status();
+    meta = await vlc.meta();
+  } catch (error) {
+    console.error(error);
+    await rpc.user?.clearActivity();
+    return;
+  }
 
   const currentEpochSeconds = new Date().getTime() / 1000;
   const startTimestamp = Math.round(currentEpochSeconds - status.time);
