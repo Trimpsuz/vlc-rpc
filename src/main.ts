@@ -285,7 +285,9 @@ const setPresence = async () => {
       details: meta.title || meta.showName || meta.filename || 'Unknown',
       state:
         meta.artist ||
-        (meta.seasonNumber || meta.episodeNumber ? `${meta.seasonNumber ? `S${meta.seasonNumber}` : ''}${meta.episodeNumber ? `E${meta.episodeNumber}` : ''}` : meta.subtitle) ||
+        (meta.seasonNumber || meta.episodeNumber
+          ? `${meta.showName ? meta.showName : ''}${meta.seasonNumber ? `S${meta.seasonNumber}` : ''}${meta.episodeNumber ? `E${meta.episodeNumber}` : ''}`
+          : meta.subtitle) ||
         meta.description ||
         (status.stats.decodedvideo === 0 ? 'Unknown Artist' : undefined),
     });
