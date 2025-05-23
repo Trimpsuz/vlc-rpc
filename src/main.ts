@@ -278,19 +278,23 @@ const setPresence = async () => {
     }
     if (!showAlbumArt || !meta.artwork_url) albumArt = null;
 
-    await rpc.user?.setActivity({
-      ...defaultProperties,
-      type: status.stats.decodedvideo === 0 ? 2 : 3, // 2 = listening, 3 = watching
-      largeImageKey: albumArt ? albumArt : 'vlc',
-      details: meta.title || meta.showName || meta.filename || 'Unknown',
-      state:
-        meta.artist ||
-        (meta.seasonNumber || meta.episodeNumber
-          ? `${meta.showName ? meta.showName : ''}${meta.seasonNumber ? `S${meta.seasonNumber}` : ''}${meta.episodeNumber ? `E${meta.episodeNumber}` : ''}`
-          : meta.subtitle) ||
-        meta.description ||
-        (status.stats.decodedvideo === 0 ? 'Unknown Artist' : undefined),
-    });
+    try {
+      await rpc.user?.setActivity({
+        ...defaultProperties,
+        type: status.stats.decodedvideo === 0 ? 2 : 3, // 2 = listening, 3 = watching
+        largeImageKey: albumArt ? albumArt : 'vlc',
+        details: meta.title || meta.showName || meta.filename || 'Unknown',
+        state:
+          meta.artist ||
+          (meta.seasonNumber || meta.episodeNumber
+            ? `${meta.showName ? meta.showName : ''} ${meta.seasonNumber ? `S${meta.seasonNumber}` : ''}${meta.episodeNumber ? `E${meta.episodeNumber}` : ''}`
+            : meta.subtitle) ||
+          meta.description ||
+          (status.stats.decodedvideo === 0 ? 'Unknown Artist' : undefined),
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 };
 
